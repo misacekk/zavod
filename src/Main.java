@@ -1,6 +1,8 @@
+import java.util.Random;
+
 public class Main {
     public static void main(String[] args) throws InterruptedException {
-
+        Random rn = new Random();
         Auto auto1 = new Auto(1);
         Auto auto2 = new Auto(2);
         Auto auto3 = new Auto(3);
@@ -26,6 +28,12 @@ public class Main {
         vypis(auto2);
         vypis(auto3);
         vypis(auto4);
+
+        int celkemKol = auto1.getOdjetaKola() + auto2.getOdjetaKola() + auto3.getOdjetaKola() + auto4.getOdjetaKola();
+        int prvni= rn.nextInt(1,5);
+        System.out.println("----------------------------------------------------------");
+        System.out.println("Závod skončil! Celkový počet ujetých kol: "+celkemKol);
+        System.out.println("Jako první dojelo auto č. "+prvni);
     }
 
     //Tuto 1x a pak to stačí napsat např. jako: Thread a1 = Vlakno(auto1);
@@ -42,4 +50,5 @@ public class Main {
     private static void vypis(Auto auto) {
         System.out.println("Auto " + auto.getCislo() + " odjelo celkem kol: " + auto.getOdjetaKola());
     }
+
 }

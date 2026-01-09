@@ -1,8 +1,8 @@
+import java.time.LocalTime;
 import java.util.Random;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
-        Random rn = new Random();
         Auto auto1 = new Auto(1);
         Auto auto2 = new Auto(2);
         Auto auto3 = new Auto(3);
@@ -24,32 +24,48 @@ public class Main {
         a4.join();
 
         System.out.println("----------------------------------------------------------");
+
         vypis(auto1);
         vypis(auto2);
         vypis(auto3);
         vypis(auto4);
 
         int celkemKol = auto1.getOdjetaKola() + auto2.getOdjetaKola() + auto3.getOdjetaKola() + auto4.getOdjetaKola();
-        int prvni= rn.nextInt(1,5);
+
+
+
 
         System.out.println("----------------------------------------------------------");
-        System.out.println("Závod skončil! Celkový počet ujetých kol: "+celkemKol);
-        System.out.println("Jako první dojelo auto č. "+prvni);
+        System.out.println("Závod skončil! Celkový počet ujetých kol: " + celkemKol);
+        System.out.println("----------------------------------------------------------");
+
+        Auto prvni = auto1;
+        if (auto2.getCas().isBefore(prvni.getCas())) prvni = auto2;
+        if (auto3.getCas().isBefore(prvni.getCas())) prvni = auto3;
+        if (auto4.getCas().isBefore(prvni.getCas())) prvni = auto4;
+
+        System.out.println("První je auto č. " + prvni.getCislo());
     }
 
-    //Tuto 1x a pak to stačí napsat např. jako: Thread a1 = Vlakno(auto1);
+
+
     private static Thread Vlakno(Auto auto) {
         return new Thread(() -> {
+            Random rn = new Random();
             for (int i = 1; i <= auto.getCilKola(); i++) {
+                try {
+                    Thread.sleep(rn.nextInt(300) + 100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 auto.pridejKolo();
                 System.out.println("Auto " + auto.getCislo() + " dokončilo kolo " + auto.getOdjetaKola());
             }
+            auto.nastavKonecnyCas();
         });
     }
 
-    //Tuto 1x a pak to stačí napsat např. jako: vypis(auto1);
     private static void vypis(Auto auto) {
         System.out.println("Auto " + auto.getCislo() + " odjelo celkem kol: " + auto.getOdjetaKola());
     }
-
 }

@@ -31,6 +31,7 @@ public class Main {
 
         int celkemKol = auto1.getOdjetaKola() + auto2.getOdjetaKola() + auto3.getOdjetaKola() + auto4.getOdjetaKola();
         int prvni= rn.nextInt(1,5);
+
         System.out.println("----------------------------------------------------------");
         System.out.println("Závod skončil! Celkový počet ujetých kol: "+celkemKol);
         System.out.println("Jako první dojelo auto č. "+prvni);

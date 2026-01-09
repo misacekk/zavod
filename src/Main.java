@@ -28,6 +28,7 @@ public class Main {
         vypis(auto4);
     }
 
+    //Tuto 1x a pak to stačí napsat např. jako: Thread a1 = Vlakno(auto1);
     private static Thread Vlakno(Auto auto) {
         return new Thread(() -> {
             for (int i = 1; i <= auto.getCilKola(); i++) {
@@ -37,6 +38,7 @@ public class Main {
         });
     }
 
+    //Tuto 1x a pak to stačí napsat např. jako: vypis(auto1);
     private static void vypis(Auto auto) {
         System.out.println("Auto " + auto.getCislo() + " odjelo celkem kol: " + auto.getOdjetaKola());
     }
